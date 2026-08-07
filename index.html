@@ -19,10 +19,40 @@
     <div class="bg-blob blob-2"></div>
     <div class="bg-blob blob-3"></div>
 
-    <div class="game-container">
+    <!-- Landing Screen (首頁 / QR Code 進入頁) -->
+    <div id="landing-screen" class="landing-overlay">
+        <div class="landing-card">
+            <div class="landing-logo">
+                <i class="fa-solid fa-brain"></i>
+            </div>
+            <h1 class="landing-title">單字配對遊戲</h1>
+            <p class="landing-subtitle">請掃描或點擊下方 QR Code 進入遊戲</p>
+
+            <!-- QR Code Interactive Container -->
+            <div id="qr-container" class="qr-code-wrapper" title="點擊 QR Code 開始遊戲">
+                <div class="qr-glow"></div>
+                <img src="qrcode.png" alt="QR Code" id="landing-qrcode" class="qr-code-img">
+                <div class="qr-hover-overlay">
+                    <i class="fa-solid fa-play"></i>
+                    <span>點擊進入遊戲</span>
+                </div>
+            </div>
+
+            <button id="start-game-btn" class="action-btn primary-btn btn-lg landing-btn">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>點擊開始遊戲</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Game Container (遊戲畫面) -->
+    <div class="game-container hidden" id="game-container">
         <!-- Header Section -->
         <header class="game-header">
             <div class="brand">
+                <button id="home-btn" class="action-btn icon-only-btn" title="返回首頁">
+                    <i class="fa-solid fa-house"></i>
+                </button>
                 <div class="logo-icon"><i class="fa-solid fa-brain"></i></div>
                 <div class="title-group">
                     <h1>單字配對</h1>
