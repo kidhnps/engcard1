@@ -1,5 +1,5 @@
 /* ==========================================================================
-   WordMatch Game Engine & Logic
+   單字配對 Game Engine & Logic
    ========================================================================== */
 
 // Card Definitions: 4 English words and 4 matching images
@@ -37,6 +37,12 @@ let soundEnabled = true;
 let audioCtx = null;
 
 // DOM Elements
+const landingScreen = document.getElementById('landing-screen');
+const gameContainer = document.getElementById('game-container');
+const qrContainer = document.getElementById('qr-container');
+const startGameBtn = document.getElementById('start-game-btn');
+const homeBtn = document.getElementById('home-btn');
+
 const cardsGrid = document.getElementById('cards-grid');
 const timerDisplay = document.getElementById('timer-display');
 const scoreDisplay = document.getElementById('score-display');
@@ -65,7 +71,18 @@ document.addEventListener('DOMContentLoaded', () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Event Listeners
+    // Landing Screen Triggers: Enter Game on QR Code or Start Button Click
+    if (qrContainer) {
+        qrContainer.addEventListener('click', enterGameFromLanding);
+    }
+    if (startGameBtn) {
+        startGameBtn.addEventListener('click', enterGameFromLanding);
+    }
+    if (homeBtn) {
+        homeBtn.addEventListener('click', returnToLandingScreen);
+    }
+
+    // Controls Event Listeners
     restartBtn.addEventListener('click', () => {
         playSound('click');
         initGame();
@@ -78,10 +95,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     soundBtn.addEventListener('click', toggleSound);
-
-    // Start First Game
-    initGame();
 });
+
+/* ==========================================================================
+   Screen Navigation (Landing <-> Game)
+   ========================================================================== */
+function enterGameFromLanding() {
+    playSound('click');
+    landingScreen.classList.add('hidden');
+    gameContainer.classList.remove('hidden');
+    initGame();
+}
+
+function returnToLandingScreen() {
+    playSound('click');
+    stopTimer();
+    gameContainer.classList.add('hidden');
+    landingScreen.classList.remove('hidden');
+}
 
 /* ==========================================================================
    Game Initialization & Shuffling
