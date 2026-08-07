@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>單字配對 - 英文單字翻牌配對遊戲</title>
+    <meta name="description" content="精美的 3D 英文單字與圖片配對記憶遊戲，考驗你的記憶力與反應速度！">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background Animated Blobs -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <div class="game-container">
+        <!-- Header Section -->
+        <header class="game-header">
+            <div class="brand">
+                <div class="logo-icon"><i class="fa-solid fa-brain"></i></div>
+                <div class="title-group">
+                    <h1>單字配對</h1>
+                    <p class="subtitle">英文單字圖片配對遊戲</p>
+                </div>
+            </div>
+
+            <!-- Dashboard Stats -->
+            <div class="stats-bar">
+                <div class="stat-card">
+                    <div class="stat-icon timer-icon"><i class="fa-solid fa-stopwatch"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">時間</span>
+                        <span class="stat-value" id="timer-display">00:00.0</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon score-icon"><i class="fa-solid fa-trophy"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">得分</span>
+                        <span class="stat-value" id="score-display">0</span>
+                    </div>
+                </div>
+
+                <div class="stat-card best-card">
+                    <div class="stat-icon best-icon"><i class="fa-solid fa-star"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-label">最高紀錄</span>
+                        <span class="stat-value" id="best-score-display">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="header-actions">
+                <button id="sound-btn" class="action-btn" title="切換音效">
+                    <i class="fa-solid fa-volume-high"></i>
+                </button>
+                <button id="restart-btn" class="action-btn primary-btn">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>重玩</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Combo & Speed Indicator Banner -->
+        <div class="status-banner">
+            <div id="combo-badge" class="combo-badge hidden">
+                <i class="fa-solid fa-bolt"></i> <span id="combo-text">COMBO x2</span>
+            </div>
+            <div class="hint-text">
+                <i class="fa-solid fa-lightbulb"></i> 翻開英文單字與對應圖片完成配對，越快完成得分越高！
+            </div>
+        </div>
+
+        <!-- Cards Grid -->
+        <main class="cards-grid" id="cards-grid">
+            <!-- Cards will be dynamically injected here via JS -->
+        </main>
+    </div>
+
+    <!-- Victory Overlay Modal -->
+    <div id="win-modal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-sparkles">✨</div>
+            <h2 class="win-title">太棒了！挑戰成功！</h2>
+            <p class="win-subtitle">完美的記憶與超快的反應！</p>
+            
+            <div class="stars-rating" id="stars-container">
+                <i class="fa-solid fa-star star active"></i>
+                <i class="fa-solid fa-star star active"></i>
+                <i class="fa-solid fa-star star active"></i>
+            </div>
+
+            <div class="summary-box">
+                <div class="summary-row">
+                    <span><i class="fa-solid fa-stopwatch"></i> 通關時間</span>
+                    <strong id="final-time">00:12.4</strong>
+                </div>
+                <div class="summary-row">
+                    <span><i class="fa-solid fa-bolt"></i> 速度加分</span>
+                    <strong id="speed-bonus">+150</strong>
+                </div>
+                <div class="summary-row total-row">
+                    <span><i class="fa-solid fa-trophy"></i> 最終總分</span>
+                    <strong id="final-score">850</strong>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button id="modal-restart-btn" class="action-btn primary-btn btn-lg">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>再玩一次</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Canvas for Confetti particle effects -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- JS Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
